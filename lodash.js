@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-09 01:16:52
+ * @LastEditTime: 2021-11-09 02:44:10
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -75,10 +75,44 @@
             } else {
                 return [];
             }
+        },
+
+        /**
+         * @description: 创建一个新数组，将array与任何数组或值连接在一起。
+         * @param {Array} array被连接的数组
+         * @param {any} values连接的值
+         * @return {Array} 返回连接后的新数组。
+         */        
+        concat(array,...values){
+            if(!(array instanceof Array)){
+                array = [array];
+            }
+            values.forEach(element => {
+              if (element instanceof Array) {
+
+                const len = element.length;
+                for(let i = 0;i < len; i++){
+                    array.push(element[i])
+                }
+                //   if (element.length !== 0) {
+                    // element.forEach(val => {
+                    //     array.push(val);
+                    // })
+                //   } 
+              } else {
+                  array.push(element)
+              }  
+            });
+            return array;
         }
+
+
+
+
     };
 
     window.bYong = window.$ = bYong;
 })(window)
 
-console.log(_.compact([1,2,0,'',false,[4,0]]));
+console.log($.concat([1,2,3],4,5,[],'',[,[2]],[6],[7,8],{name:'a'}));
+// console.log(_.compact([1,2,0,'',false,[4,0]]));
