@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-09 12:03:40
+ * @LastEditTime: 2021-11-09 12:11:28
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -182,8 +182,9 @@
 
 let arr = [1,2,3,[4,5],'a','b',[6,'c',[7,8,'d']],false,'']
 
+
 console.log($.dropRight(arr,1));
-// console.log($.drop(arr,3));
-// console.log($.difference([1, 2, 3, [4, 5], [6, [7, 8]]], [2, 3],1))
-// console.log($.concat([1,2,3],4,5,[],'',[,[2]],[6],[7,8],{name:'a'}));
-// console.log(_.compact([1,2,0,'',false,[4,0]]));
+console.log($.drop(arr,3));
+console.log($.difference([1, 2, 3, [4, 5], [6, [7, 8]]], [2, 3],1))
+console.log($.concat([1,2,3],4,5,[],'',[,[2]],[6],[7,8],{name:'a'}));
+console.log(_.compact([1,2,0,'',false,[4,0]]));
