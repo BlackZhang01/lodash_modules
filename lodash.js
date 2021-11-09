@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-09 11:17:31
+ * @LastEditTime: 2021-11-09 11:45:41
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -31,6 +31,7 @@
  * 　　　　┗┻┛　┗┻┛+ + + +
  * 
  */
+
 
 (function (window, undefined) {
 
@@ -139,18 +140,34 @@
                 })
                 return result;
             }
-        }
+        },
 
+        /**
+         * @description: 创建一个切片数组，去除 array 前面的 n 个元素。（n 默认值为 1.）
+         * @param {Array} array 要查询的数组。
+         * @param {Number} n 要去除的元素个数。
+         * @return {Array} 返回 array 剩余切片。
+         */        
+        drop(array,n=1){
+            if(!(array instanceof Array) || array.length == 0){
+                return [];
+            }else{
+                if(typeof n !== 'number'){
+                    n = 1;
+                }
+                return array.splice(n);
+            }
+        },
 
-
-
+        
     };
 
     window.bYong = window.$ = bYong;
 })(window)
 
+let arr = [1,2,3,[4,5],'a','b',[6,'c',[7,8,'d']],false,'']
 
-
+console.log($.drop(arr,3));
 // console.log($.difference([1, 2, 3, [4, 5], [6, [7, 8]]], [2, 3],1))
 // console.log($.concat([1,2,3],4,5,[],'',[,[2]],[6],[7,8],{name:'a'}));
 // console.log(_.compact([1,2,0,'',false,[4,0]]));
