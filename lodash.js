@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-10 04:44:21
+ * @LastEditTime: 2021-11-10 06:30:17
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -201,6 +201,47 @@
                 return array;
             }
             
+        },
+
+        /**
+         * @description: 判断 value 是不是纯粹的对象，就是该对象是通过 "{}"或 "new Object" 创建的。
+         * @param {*} value 待检测的值。
+         * @return {Boolean}  返回布尔值。
+         */        
+        isObject(value){
+            if(Object.prototype.toString.call(value) === '[object Object]'){
+                return true;
+            }else{
+                return false;
+            }
+        },
+
+        /**
+         * @description: 该方法类似$.find,区别是该方法返回第一个通过 predicate 判断为真值的元素的索引值（index），而不是元素本身。
+         * @param {array} array 要搜索的数组。
+         * @param {array|Function|object|string} predicate 这个函数会在每一次迭代调用。
+         * @param {Number} fromIndex The index to search from.
+         * @return {Number} 返回找到元素的索引值（index），否则返回 -1。
+         */        
+        findIndex(array,predicate,fromIndex=0){
+            if (!(array instanceof Array) || array.length == 0) {
+                return [];
+            } else {
+                for(let i = 0,len = array.length;i < len;i ++){
+                    if(typeof predicate ==='function'){
+                        let pre = predicate(array[i])
+                        if(pre){
+                            return i;
+                        }
+                    }else if(this.isObject(predicate)){
+                        if(JSON.stringify(array[i] === JSON.stringify(predicate))){
+                            return i;
+                        }
+                    }else{
+                        return -1;
+                    }
+                }
+            }
         }
 
 
@@ -211,8 +252,19 @@
 })(window)
 
 let arr = [1,2,3,[4,5],'a','b',[6,'c',[7,8,'d']],false,'']
+var users = [
+    { 'user': 'barney',  'active': false },
+    { 'user': 'fred',    'active': false },
+    { 'user': 'pebbles', 'active': true }
+  ];
+   
 
-
+  console.log($.findIndex(users, function(o) { return o.user == 'barney'; }))
+  // => 0
+   
+  // The `_.matches` iteratee shorthand.
+console.log(  $.findIndex(users, { 'user': 'fred', 'active': false }));
+  // => 1
 // console.log($.fill(arr,'tes',1,4));
 // console.log($.dropRight(arr,1));
 // console.log($.drop(arr,3));
