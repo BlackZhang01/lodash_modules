@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-09 12:11:28
+ * @LastEditTime: 2021-11-10 04:44:21
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -31,6 +31,7 @@
  * 　　　　┗┻┛　┗┻┛+ + + +
  * 
  */
+
 
 
 (function (window, undefined) {
@@ -174,7 +175,36 @@
                 }
                 return array.splice(0,array.length - n)
             }
+        },
+
+        /**
+         * @description: 使用 value 值来填充（替换）array，从 start 位置开始，到 end 位置结束（但不包含 end 位置）。
+         * Note：这个方法会改变 array（注：不是创建新数组）。
+         * @param {Array} array 要填充改变的数组。
+         * @param {Any} value 填充给 array 的值。
+         * @param {Number} start 开始位置（默认 0）。
+         * @param {Number} end 结束位置（默认 array.length）。
+         * @return {Array} 返回 array。
+         */        
+        fill(array,value,start = 0,end = array.length){
+            if (!(array instanceof Array) || array.length == 0) {
+                return [];
+            } else {
+                start = typeof start !== 'number' ? 0:start;
+                end = typeof end !== 'number' ? array.length : end;
+                const tempArr = [];
+                const len = end - start;
+                for(let i = 0;i < len; i++){
+                    tempArr[i] = value;
+                }
+                array.splice(start,len,...tempArr);
+                return array;
+            }
+            
         }
+
+
+
     };
 
     window.bYong = window.$ = bYong;
@@ -183,8 +213,9 @@
 let arr = [1,2,3,[4,5],'a','b',[6,'c',[7,8,'d']],false,'']
 
 
-console.log($.dropRight(arr,1));
-console.log($.drop(arr,3));
-console.log($.difference([1, 2, 3, [4, 5], [6, [7, 8]]], [2, 3],1))
-console.log($.concat([1,2,3],4,5,[],'',[,[2]],[6],[7,8],{name:'a'}));
-console.log(_.compact([1,2,0,'',false,[4,0]]));
+// console.log($.fill(arr,'tes',1,4));
+// console.log($.dropRight(arr,1));
+// console.log($.drop(arr,3));
+// console.log($.difference([1, 2, 3, [4, 5], [6, [7, 8]]], [2, 3],1))
+// console.log($.concat([1,2,3],4,5,[],'',[,[2]],[6],[7,8],{name:'a'}));
+// console.log(_.compact([1,2,0,'',false,[4,0]]));
