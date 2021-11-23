@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-10 06:30:17
+ * @LastEditTime: 2021-11-23 10:31:43
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -242,6 +242,25 @@
                     }
                 }
             }
+        },
+
+        /**
+         * @description: 减少一级array嵌套深度。
+         * @param {array} array 需要减少嵌套层级的数组
+         * @return {*} 返回减少嵌套层级后的新数组
+         */        
+        flatten(array){
+            let newArr = [];
+            array.forEach(value => {
+                if(value instanceof Array){
+                    value.forEach(val => {
+                        newArr.push(val)
+                    })
+                }else{
+                    newArr.push(value)
+                }
+
+            })
         }
 
 
