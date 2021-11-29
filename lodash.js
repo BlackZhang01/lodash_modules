@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-23 10:31:43
+ * @LastEditTime: 2021-11-29 12:39:08
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -261,7 +261,33 @@
                 }
 
             })
+            return newArr;
+        },
+
+        /**
+         * @description: 将array递归为一维数组。
+         * @param {*} array 需要处理的数组。
+         * @return {*} 返回一个的新一维数组。
+         */        
+        flattenDeep(array){
+            let result = [];
+            let length = array.length ? array.length:0;
+            if(length){
+                for(const val of array){
+                    if(val instanceof Array){
+                        result.push(...this.flattenDeep(val))
+                    }else{
+                        result.push(val)
+                    }
+                }
+            }else{
+                return 
+            }
+            return result
+            
+
         }
+
 
 
 
