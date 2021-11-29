@@ -1,7 +1,7 @@
 /*
  * @Author: BlackSkye
  * @Date: 2021-11-08 04:50:15
- * @LastEditTime: 2021-11-29 12:39:08
+ * @LastEditTime: 2021-11-29 12:50:28
  * @LastEditors: Please set LastEditors
  * @Description: 模仿lodash实现功能
  * @FilePath: /lodash_modules/lodash.js
@@ -286,6 +286,23 @@
             return result
             
 
+        },
+
+        /**
+         * @description: 这个方法返回一个由键值对pairs构成的对象。
+         * @param {*} pairs 键值对pairs。
+         * @return {*} 返回一个新对象。
+         */        
+        fromPairs(pairs){
+            const result = {};
+            try {
+                pairs.forEach(val => {
+                    result[val[0]] = val[1]
+                })
+            } catch (error) {
+                console.log(error);
+            }
+            return result
         }
 
 
