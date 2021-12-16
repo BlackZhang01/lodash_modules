@@ -133,7 +133,7 @@
                     // console.log(ele)
                     for (let i = 0, len = tempArr.length; i < len; i++) {
                         // console.log(tempArr);
-                        if(tempArr[i] === ele){
+                        if (tempArr[i] === ele) {
                             return -1;
                         }
                     }
@@ -148,12 +148,12 @@
          * @param {Array} array 要查询的数组。
          * @param {Number} n 要去除的元素个数。
          * @return {Array} 返回 array 剩余切片。
-         */        
-        drop(array,n=1){
-            if(!(array instanceof Array) || array.length == 0){
+         */
+        drop(array, n = 1) {
+            if (!(array instanceof Array) || array.length == 0) {
                 return [];
-            }else{
-                if(typeof n !== 'number'){
+            } else {
+                if (typeof n !== 'number') {
                     n = 1;
                 }
                 return array.splice(n);
@@ -165,15 +165,15 @@
          * @param {Array} array 要查询的数组。
          * @param {Number} n 要去除的元素个数。
          * @return {Array} 返回 array 剩余切片。
-         */        
-        dropRight(array,n=1){
+         */
+        dropRight(array, n = 1) {
             if (!(array instanceof Array) || array.length == 0) {
                 return [];
             } else {
-                if(typeof n !== 'number'){
+                if (typeof n !== 'number') {
                     n = 1;
                 }
-                return array.splice(0,array.length - n)
+                return array.splice(0, array.length - n)
             }
         },
 
@@ -185,33 +185,33 @@
          * @param {Number} start 开始位置（默认 0）。
          * @param {Number} end 结束位置（默认 array.length）。
          * @return {Array} 返回 array。
-         */        
-        fill(array,value,start = 0,end = array.length){
+         */
+        fill(array, value, start = 0, end = array.length) {
             if (!(array instanceof Array) || array.length == 0) {
                 return [];
             } else {
-                start = typeof start !== 'number' ? 0:start;
+                start = typeof start !== 'number' ? 0 : start;
                 end = typeof end !== 'number' ? array.length : end;
                 const tempArr = [];
                 const len = end - start;
-                for(let i = 0;i < len; i++){
+                for (let i = 0; i < len; i++) {
                     tempArr[i] = value;
                 }
-                array.splice(start,len,...tempArr);
+                array.splice(start, len, ...tempArr);
                 return array;
             }
-            
+
         },
 
         /**
          * @description: 判断 value 是不是纯粹的对象，就是该对象是通过 "{}"或 "new Object" 创建的。
          * @param {*} value 待检测的值。
          * @return {Boolean}  返回布尔值。
-         */        
-        isObject(value){
-            if(Object.prototype.toString.call(value) === '[object Object]'){
+         */
+        isObject(value) {
+            if (Object.prototype.toString.call(value) === '[object Object]') {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         },
@@ -222,22 +222,22 @@
          * @param {array|Function|object|string} predicate 这个函数会在每一次迭代调用。
          * @param {Number} fromIndex The index to search from.
          * @return {Number} 返回找到元素的索引值（index），否则返回 -1。
-         */        
-        findIndex(array,predicate,fromIndex=0){
+         */
+        findIndex(array, predicate, fromIndex = 0) {
             if (!(array instanceof Array) || array.length == 0) {
                 return [];
             } else {
-                for(let i = 0,len = array.length;i < len;i ++){
-                    if(typeof predicate ==='function'){
+                for (let i = 0, len = array.length; i < len; i++) {
+                    if (typeof predicate === 'function') {
                         let pre = predicate(array[i])
-                        if(pre){
+                        if (pre) {
                             return i;
                         }
-                    }else if(this.isObject(predicate)){
-                        if(JSON.stringify(array[i] === JSON.stringify(predicate))){
+                    } else if (this.isObject(predicate)) {
+                        if (JSON.stringify(array[i] === JSON.stringify(predicate))) {
                             return i;
                         }
-                    }else{
+                    } else {
                         return -1;
                     }
                 }
@@ -248,15 +248,15 @@
          * @description: 减少一级array嵌套深度。
          * @param {array} array 需要减少嵌套层级的数组
          * @return {*} 返回减少嵌套层级后的新数组
-         */        
-        flatten(array){
+         */
+        flatten(array) {
             let newArr = [];
             array.forEach(value => {
-                if(value instanceof Array){
+                if (value instanceof Array) {
                     value.forEach(val => {
                         newArr.push(val)
                     })
-                }else{
+                } else {
                     newArr.push(value)
                 }
 
@@ -268,23 +268,23 @@
          * @description: 将array递归为一维数组。
          * @param {*} array 需要处理的数组。
          * @return {*} 返回一个的新一维数组。
-         */        
-        flattenDeep(array){
+         */
+        flattenDeep(array) {
             let result = [];
-            let length = array.length ? array.length:0;
-            if(length){
-                for(const val of array){
-                    if(val instanceof Array){
+            let length = array.length ? array.length : 0;
+            if (length) {
+                for (const val of array) {
+                    if (val instanceof Array) {
                         result.push(...this.flattenDeep(val))
-                    }else{
+                    } else {
                         result.push(val)
                     }
                 }
-            }else{
-                return 
+            } else {
+                return
             }
             return result
-            
+
 
         },
 
@@ -292,8 +292,8 @@
          * @description: 这个方法返回一个由键值对pairs构成的对象。
          * @param {*} pairs 键值对pairs。
          * @return {*} 返回一个新对象。
-         */        
-        fromPairs(pairs){
+         */
+        fromPairs(pairs) {
             const result = {};
             try {
                 pairs.forEach(val => {
@@ -303,6 +303,32 @@
                 console.log(error);
             }
             return result
+        },
+
+        /**
+       * @description: 使用SameValueZero 等值比较，返回首次 value 在数组array中被找到的 索引值， 如果 fromIndex 为负值，将从数组array尾端索引进行匹配。
+       * @param {*} array (Array): 需要查找的数组。
+       * @param value (*): 需要查找的值。
+       * @param [fromIndex=0] (number): 开始查询的位置。
+       * @return {*} 返回一个新对象。
+       */
+        indexOf(array, value, fromIndex = 0) {
+            if (fromIndex >= 0) {
+                for (let i = fromIndex; i < array.length; i++) {
+                    if (array[i] === value) {
+                        return i
+                    }
+                }
+                return -1
+            } else if (fromIndex < 0) {
+                for (let i = array.length + fromIndex; i >= 0; i--) {
+                    if (array[i] === value) {
+                        return i
+                    }
+
+                }
+                return -1
+            }
         }
 
 
@@ -313,19 +339,20 @@
     window.bYong = window.$ = bYong;
 })(window)
 
-let arr = [1,2,3,[4,5],'a','b',[6,'c',[7,8,'d']],false,'']
+let arr = [1, 2, 3, [4, 5], 'a', 'b', [6, 'c', [7, 8, 'd']], false, '']
 var users = [
-    { 'user': 'barney',  'active': false },
-    { 'user': 'fred',    'active': false },
+    { 'user': 'barney', 'active': false },
+    { 'user': 'fred', 'active': false },
     { 'user': 'pebbles', 'active': true }
-  ];
-   
+];
 
-  console.log($.findIndex(users, function(o) { return o.user == 'barney'; }))
-  // => 0
-   
-  // The `_.matches` iteratee shorthand.
-console.log(  $.findIndex(users, { 'user': 'fred', 'active': false }));
+console.log($.indexOf(arr, 'a'));
+console.log($.indexOf(arr, 'b', -3));
+// console.log($.findIndex(users, function (o) { return o.user == 'barney'; }))
+// => 0
+
+// The `_.matches` iteratee shorthand.
+// console.log($.findIndex(users, { 'user': 'fred', 'active': false }));
   // => 1
 // console.log($.fill(arr,'tes',1,4));
 // console.log($.dropRight(arr,1));
