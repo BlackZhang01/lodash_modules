@@ -32,6 +32,8 @@
  * 
  */
 
+const { initial } = require("lodash");
+
 
 
 (function (window, undefined) {
@@ -329,6 +331,31 @@
                 }
                 return -1
             }
+        },
+
+        /**
+         * @description: 判断是不是数组
+         * @param {*} array (Array): 需要检查的数据。
+         * @return {*} 返回一个布尔值。
+         */
+        isArray(arr) {
+            let isArr = Object.prototype.toString.call(arr)
+            if (isArr === '[object array]') {
+                return true
+            }
+            return false
+        },
+
+        /**
+         * @description: 获取数组array中除了最后一个元素之外的所有元素（注：去除数组array中的最后一个元素）。
+         * @param {*} array (Array): 需要检查的数据。
+         * @return {*} 返回截取后的数组array。
+         */
+        initial(arr) {
+            if (this.isArray(arr)) {
+                return arr.slice(0, arr.length - 1)
+            }
+            return []
         }
 
 
